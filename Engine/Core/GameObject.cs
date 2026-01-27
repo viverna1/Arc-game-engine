@@ -3,24 +3,55 @@ using System.Linq;
 
 namespace Engine.Core;
 
-public class GameObject
+public class gameObject
 {
     public string Name { get; set; } = "Game Object";
-    public string TagString { get; set; } = "Untagged";
+    public string Tag { get; set; } = "Untagged";
     public bool IsActive { get; set; } = true;
-
+    
     private List<Component> _components = [];
+    
+    // Иерархия
+    private gameObject? _parent;
+    private List<gameObject> _children = [];
+    
+    public gameObject? Parent => _parent;
+    public IReadOnlyList<gameObject> Children => _children;
 
-    public GameObject(string? name = null)
+    public gameObject(string? name = null)
     {
         if (name != null)
             Name = name;
     }
 
+    // Управление иерархией
+    public void SetParent(gameObject? parent)
+    {
+        // Удаляем из старого родителя
+        _parent?._children.Remove(this);
+        
+        // Добавляем к новому
+        _parent = parent;
+        _parent?._children.Add(this);
+    }
+
+    public void AddChild(gameObject child)
+    {
+        child.SetParent(this);
+    }
+
+    public void RemoveChild(gameObject child)
+    {
+        if (_children.Remove(child))
+        {
+            child._parent = null;
+        }
+    }
+
     public T AddComponent<T>() where T : Component, new()
     {
         T component = new();
-        component.GameObject = this;
+        component.gameObject = this;
         _components.Add(component);
         component.Start();
         return component;
@@ -37,15 +68,29 @@ public class GameObject
         {
             component.Start();
         }
+        
+        foreach (var child in _children)
+        {
+            child.Start();
+        }
     }
 
     public void Update(float deltaTime)
     {
+        if (!IsActive) return;
+        
         foreach (var component in _components)
         {
             component.Update(deltaTime);
         }
+        
+        foreach (var child in _children)
+        {
+            child.Update(deltaTime);
+        }
     }
 
-    public Components.Transform? Transform => GetComponent<Components.Transform>();
+    public void SetActive(bool state) => IsActive = state;
+    
+    public Components.Transform? transform => GetComponent<Components.Transform>();
 }

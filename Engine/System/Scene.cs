@@ -1,0 +1,51 @@
+using Engine.Components;
+using SFML.Graphics;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace Engine.Core;
+
+public class Scene
+{
+    public string Name { get; }
+    private List<gameObject> _gameObjects = new();
+    
+    public Scene(string name = "Scene")
+    {
+        Name = name;
+    }
+    
+    public void AddGameObject(gameObject gameObject)
+    {
+        _gameObjects.Add(gameObject);
+    }
+    
+    public gameObject? Find(string name) => _gameObjects.Find(obj => obj.Name == name);
+    
+    public List<gameObject> FindWithTag(string tag) => _gameObjects.FindAll(obj => obj.Tag == tag);
+    
+    public void Start()
+    {
+        foreach (var obj in _gameObjects)
+            obj.Start();
+    }
+    
+    public void Update(float deltaTime)
+    {
+        foreach (var obj in _gameObjects)
+            obj.Update(deltaTime);
+    }
+    
+    public void Render(RenderWindow window)
+    {
+        // Сортировка по ZLayer
+        var sorted = _gameObjects
+            .Where(obj => obj.IsActive)
+            .OrderBy(obj => obj.GetComponent<SpriteRenderer>()?.ZLayer ?? 0);
+        
+        foreach (var obj in sorted)
+        {
+            obj.GetComponent<SpriteRenderer>()?.Draw(window);
+        }
+    }
+}

@@ -1,70 +1,67 @@
 ﻿using Engine.Core;
-using Engine.Components;
 using Engine.System;
-
 using SFML.Graphics;
 using SFML.System;
 using SFML.Window;
-
-using System.Collections.Generic;
 using System;
 
-class Application
-{
-    public RenderWindow Window { get; }
+namespace Engine;
 
-    private List<GameObject> _objects { get; } = [];
-    private Dictionary<Keyboard.Key, Action> _keyActions = [];
+public sealed class Application
+{
+    private static Application? _instance;
+    public static Application Instance => _instance ?? throw new InvalidOperationException("Application not initialized");
     
-    public Application(uint width, uint height, string title = "Game")
+    public RenderWindow Window { get; }
+    private Scene? _currentScene;
+    
+    private Application(uint width, uint height, string title)
     {
-        Vector2u windowSize = new(width, height);
+        Vector2u windowSize = new Vector2u(width, height);
         Window = new RenderWindow(new VideoMode(windowSize), title);
         Window.Closed += (s, e) => Window.Close();
-        Window.SetFramerateLimit(60); // Лимит фпс
-
-        Window.KeyPressed += (s, e) => 
-        {
-            Input.Update(e);
-            if (_keyActions.TryGetValue(e.Code, out var action))
-                action();
-        };
+        
+        // Подписываемся на события клавиатуры
+        Window.KeyPressed += (s, e) => Input.OnKeyPressed(e.Code);
+        Window.KeyReleased += (s, e) => Input.OnKeyReleased(e.Code);
+        
+        // Подписываемся на события мыши
+        Window.MouseButtonPressed += (s, e) => Input.OnMouseButtonPressed(e.Button);
+        Window.MouseButtonReleased += (s, e) => Input.OnMouseButtonReleased(e.Button);
+        Window.MouseMoved += (s, e) => Input.OnMouseMoved(e.Position);
+        Window.MouseWheelScrolled += (s, e) => Input.OnMouseWheelScrolled(e.Delta);
+        
+        Window.SetFramerateLimit(60);
     }
-
+    
+    public static void Initialize(uint width, uint height, string title = "Game")
+    {
+        if (_instance != null) 
+            throw new InvalidOperationException("Application already initialized");
+        _instance = new Application(width, height, title);
+    }
+    
+    public void LoadScene(Scene scene)
+    {
+        _currentScene = scene;
+        // scene.Start();
+    }
+    
     public void Run()
     {
-        // Вызов Start у всех обьектов
-        foreach (GameObject obj in _objects)
-        {
-            obj.Start();
-        }
-
-        // Главный цикл
         Clock clock = new Clock();
+        
         while (Window.IsOpen)
         {
-            Window.DispatchEvents(); // Обработка событий
-            Window.Clear(new Color(0x0f, 0x12, 0x2a)); // Очистка экрана (цвет #0f122a)
-            float deltaTime = clock.Restart().AsSeconds();
-
-            // Вызов Update у всех обьектов
-            foreach (GameObject obj in _objects)
-            {
-                obj.Update(deltaTime);
-                obj.GetComponent<SpriteRenderer>()?.Draw(Window);
-            }
+            Input.Update();
+            Window.DispatchEvents();
+            Window.Clear(new Color(0x0f, 0x12, 0x2a));
             
-            Window.Display(); // Отображение на экране
+            float deltaTime = clock.Restart().AsSeconds();
+            _currentScene?.Update(deltaTime);
+            _currentScene?.Render(Window);
+            
+            Window.Display();
         }
-    }
-
-    public void BindKey(Keyboard.Key key, Action action)
-    {
-        _keyActions[key] = action;
-    }
-
-    public void AddGameObject(GameObject gameObject)
-    {
-        _objects.Add(gameObject);
     }
 }

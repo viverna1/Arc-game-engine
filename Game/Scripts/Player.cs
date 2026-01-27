@@ -1,38 +1,48 @@
-using SFML.System;
-using SFML.Window;
 using Engine.Core;
+using Engine.System;
+using SFML.Window;
+using SFML.System;
+using System;
 
-class Player : Component
+
+public class Player : Component
 {
-    private float speed = 10;
+    public float Speed = 200f;
+    public gameObject? RayObject;
 
-    public override void Start() {
-        var transform = GameObject.Transform;
-        if (transform == null) return;
-
-        transform.Position = new Vector2f(600, 400);
+    public override void Start()
+    {
+        Console.WriteLine("start");
     }
 
-    public override void OnTick()
+    public override void Update(float deltaTime)
     {
-        Move();
-    }
-
-    public void Move()
-    {
-        Vector2f direction = new();
-        if (Keyboard.IsKeyPressed(Keyboard.Key.Left))
-            direction.X -= 1;
-        if (Keyboard.IsKeyPressed(Keyboard.Key.Right))
-            direction.X += 1;
-        if (Keyboard.IsKeyPressed(Keyboard.Key.Down))
-            direction.Y += 1;
-        if (Keyboard.IsKeyPressed(Keyboard.Key.Up))
-            direction.Y -= 1;
-
-        var transform = GameObject.Transform;
-        if (transform == null) return;
+        Vector2f movement = new(0, 0);
         
-        transform.Position += direction * speed;
+        if (Input.IsKeyPressed(Keyboard.Key.Up)) movement.Y -= 1;
+        if (Input.IsKeyPressed(Keyboard.Key.Down)) movement.Y += 1;
+        if (Input.IsKeyPressed(Keyboard.Key.Left)) movement.X -= 1;
+        if (Input.IsKeyPressed(Keyboard.Key.Right)) movement.X += 1;
+        
+        transform!.Position += movement * Speed * deltaTime;
+
+        // Движение мыши (для камеры, прицела)
+        var mousePos = Input.GetMousePosition();
+        if (mousePos.X != 0 || mousePos.Y != 0)
+        {
+            float angle = VectorMath.AngleBetweenDegrees(transform!.Position, mousePos);
+            transform!.Rotation = angle - 45f;
+        }
+
+        if (Input.IsMouseButtonPressed(Mouse.Button.Left))
+        {
+            RayObject!.SetActive(true);
+            float distance = VectorMath.Distance(transform!.Position, mousePos);
+            RayObject!.transform!.SetSize(distance, RayObject!.transform!.Size.Y);
+        }
+        else
+        {
+            RayObject!.SetActive(false);
+        }
     }
 }

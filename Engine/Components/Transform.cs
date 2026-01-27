@@ -1,18 +1,91 @@
 using SFML.System;
 using Engine.Core;
+using System;
 
 namespace Engine.Components;
 
 public class Transform : Component
 {
-    private Vector2f _position = new(0, 0);
+    private Vector2f _localPosition = new(0, 0);
     
+    // Локальная позиция (относительно родителя)
+    public Vector2f LocalPosition
+    {
+        get => new(_localPosition.X, -_localPosition.Y);
+        set => _localPosition = new(value.X, -value.Y);
+    }
+    
+    // Мировая позиция (с учетом родителя)
     public Vector2f Position
     {
-        get => new(_position.X, -_position.Y);
-        set => _position = new(value.X, -value.Y);
+        get
+        {
+            if (gameObject.Parent?.transform != null)
+            {
+                return gameObject.Parent.transform.Position + LocalPosition;
+            }
+            return LocalPosition;
+        }
+        set
+        {
+            if (gameObject.Parent?.transform != null)
+            {
+                LocalPosition = value - gameObject.Parent.transform.Position;
+            }
+            else
+            {
+                LocalPosition = value;
+            }
+        }
+    }
+    
+    private float _localRotation;
+    
+    // Локальный поворот
+    public float LocalRotation
+    {
+        get => _localRotation;
+        set => _localRotation = value;
+    }
+    
+    // Мировой поворот (с учетом родителя)
+    public float Rotation
+    {
+        get
+        {
+            if (gameObject.Parent?.transform != null)
+            {
+                return gameObject.Parent.transform.Rotation + LocalRotation;
+            }
+            return LocalRotation;
+        }
+        set
+        {
+            if (gameObject.Parent?.transform != null)
+            {
+                LocalRotation = value - gameObject.Parent.transform.Rotation;
+            }
+            else
+            {
+                LocalRotation = value;
+            }
+        }
     }
     
     public Vector2f Size { get; set; } = new(50, 50);
-    public float Rotation { get; set; }
+
+    public void SetPosition(float x, float y)
+    {
+        Position = new Vector2f(x, y);
+    }
+    
+    public void SetLocalPosition(float x, float y)
+    {
+        LocalPosition = new Vector2f(x, y);
+    }
+    
+    public void SetSize(float width, float height)
+    {
+        Size = new Vector2f(width, height);
+    }
 }

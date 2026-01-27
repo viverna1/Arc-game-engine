@@ -8,18 +8,20 @@ public class SpriteRenderer : Component
 {
     public Color FillColor = Color.White;
     public short ZLayer = 0;
+    public string? SpritePath;
+    public Texture? Texture;
 
     private RectangleShape _shape = new();
     
     public override void Start()
     {
-        if (GameObject.GetComponent<Transform>() == null)
+        if (gameObject.GetComponent<Transform>() == null)
         {
             throw new InvalidOperationException(
-                $"SpriteRenderer requires Transform on GameObject '{GameObject.Name}'");
+                $"SpriteRenderer requires Transform on GameObject '{gameObject.Name}'");
         }
 
-        var transform = GameObject.Transform!; // Получаем Transform
+        var transform = gameObject.transform!; // Получаем Transform
         _shape.Position = transform.Position;
         _shape.Size = transform.Size;
         _shape.FillColor = FillColor;
@@ -28,14 +30,20 @@ public class SpriteRenderer : Component
     public override void Update(float deltaTime)
     {
         // Обновляем позицию, если Transform изменился
-        var transform = GameObject.Transform!;
+        var transform = gameObject.transform!;
         _shape.Position = transform.Position;
         _shape.Rotation = transform.Rotation;
+        _shape.Size = transform.Size;
         _shape.FillColor = FillColor;
     }
     
     public void Draw(RenderWindow window)
     {
         window.Draw(_shape);
+    }
+
+    public void SetOrigin(float width, float height)
+    {
+        _shape.Origin = new SFML.System.Vector2f(width, height);
     }
 }

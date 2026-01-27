@@ -1,8 +1,10 @@
+using Engine.Components;
+
 namespace Engine.Core;
 
 public abstract class Component
 {
-    public GameObject GameObject { get; set; } = null!;
+    public gameObject gameObject { get; set; } = null!;
     public float TickRate { get; set; } = 20f;
     private float _timer;
     
@@ -18,4 +20,6 @@ public abstract class Component
             _timer -= tickInterval;
         }
     }
+
+    public Transform? transform => gameObject?.transform;
 }
