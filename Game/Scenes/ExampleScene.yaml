@@ -1,0 +1,31 @@
+--- &1000479
+GameObject:
+  Name: Player
+  Tag: Untagged
+
+  Components:
+    - 1000480  # Transform
+    - 1000481  # Player
+    - 1000482  # SpriteRenderer
+
+  IsActive: true
+
+--- &1000480
+Component:
+  Name: Transform
+  GameObject: 1000479
+  Position: {x: 0, y: 0}
+  Size: {x: 0, y: 0}
+  Rotation: 0
+
+--- &1000481
+Component:
+  Name: Player
+  GameObject: 1000479
+
+--- &1000482
+Component:
+  Name: SpriteRenderer
+  GameObject: 1000479
+  FillColor: {r: 1, g: 1, b: 1, a: 1}
+  ZLayer: 0
