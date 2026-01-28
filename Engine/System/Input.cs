@@ -19,6 +19,7 @@ public static class Input
     private static Vector2i _mouseDelta;
     private static Vector2i _previousMousePosition;
     private static float _mouseWheelDelta;
+    public static RenderWindow? _window;
 
     // Вызывается в начале каждого кадра
     internal static void Update()
@@ -99,6 +100,11 @@ public static class Input
         return new Vector2f(_mousePosition.X, _mousePosition.Y) - center;
     }
 
+    public static Vector2i GetMousePositionRaw()
+    {
+        return _mousePosition;
+    }
+    
     // Позиция мыши в мировых координатах (с учетом камеры)
-    public static Vector2f GetMouseWorldPosition(RenderWindow window) => window.MapPixelToCoords(_mousePosition);
+    public static Vector2f GetMouseWorldPosition() => _window!.MapPixelToCoords(_mousePosition);
 }

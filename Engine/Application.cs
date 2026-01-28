@@ -20,6 +20,7 @@ public sealed class Application
         Vector2u windowSize = new Vector2u(width, height);
         Window = new RenderWindow(new VideoMode(windowSize), title);
         Window.Closed += (s, e) => Window.Close();
+        Input._window = Window;
         
         // Подписываемся на события клавиатуры
         Window.KeyPressed += (s, e) => Input.OnKeyPressed(e.Code);

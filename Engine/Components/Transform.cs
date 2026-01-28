@@ -78,6 +78,11 @@ public class Transform : Component
     {
         Position = new Vector2f(x, y);
     }
+
+    public void SetPosition(Vector2f pos)
+    {
+        Position = pos;
+    }
     
     public void SetLocalPosition(float x, float y)
     {

@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace Engine.Core;
 
-public class gameObject
+public class GameObject
 {
     public string Name { get; set; } = "Game Object";
     public string Tag { get; set; } = "Untagged";
@@ -12,20 +12,20 @@ public class gameObject
     private List<Component> _components = [];
     
     // Иерархия
-    private gameObject? _parent;
-    private List<gameObject> _children = [];
+    private GameObject? _parent;
+    private List<GameObject> _children = [];
     
-    public gameObject? Parent => _parent;
-    public IReadOnlyList<gameObject> Children => _children;
+    public GameObject? Parent => _parent;
+    public IReadOnlyList<GameObject> Children => _children;
 
-    public gameObject(string? name = null)
+    public GameObject(string? name = null)
     {
         if (name != null)
             Name = name;
     }
 
     // Управление иерархией
-    public void SetParent(gameObject? parent)
+    public void SetParent(GameObject? parent)
     {
         // Удаляем из старого родителя
         _parent?._children.Remove(this);
@@ -35,12 +35,12 @@ public class gameObject
         _parent?._children.Add(this);
     }
 
-    public void AddChild(gameObject child)
+    public void AddChild(GameObject child)
     {
         child.SetParent(this);
     }
 
-    public void RemoveChild(gameObject child)
+    public void RemoveChild(GameObject child)
     {
         if (_children.Remove(child))
         {

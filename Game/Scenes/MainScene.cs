@@ -8,16 +8,19 @@ public static class GameScene
     public static void Setup(Scene scene)
     {
         // Камера
-        var camera = new gameObject("MainCamera");
+        var camera = new GameObject("MainCamera");
         var cameraComp = camera.AddComponent<Camera>();
         cameraComp.SetPosition(new Vector2f(0, 0));
+        var cameraControlComp = camera.AddComponent<CameraControl>();
+        cameraControlComp.camera = cameraComp;
         scene.AddGameObject(camera);
         
         // Игрок
-        var player = new gameObject("Player");
+        var player = new GameObject("Player");
         player.AddComponent<Transform>();
         player.AddComponent<SpriteRenderer>().SetOrigin(25, 25);
         player.AddComponent<Player>();
+        cameraControlComp!.player = player;
 
         // Трава
         Random random = new Random();
@@ -27,7 +30,7 @@ public static class GameScene
                 random.Next(-500, 500),
                 random.Next(-500, 500)
             );
-            var grass = new gameObject($"Grass_{i}");
+            var grass = new GameObject($"Grass_{i}");
             var grassTransform = grass.AddComponent<Transform>();
             grassTransform.Position = pos;
             grassTransform.Rotation = random.Next(0, 360);
@@ -37,7 +40,7 @@ public static class GameScene
         }
 
         // Луч
-        var ray = new gameObject("Ray");
+        var ray = new GameObject("Ray");
         var rayTrans = ray.AddComponent<Transform>();
         rayTrans.Size = new Vector2f(100, 5);
         rayTrans.Rotation = 45;

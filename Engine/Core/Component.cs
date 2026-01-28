@@ -4,7 +4,7 @@ namespace Engine.Core;
 
 public abstract class Component
 {
-    public gameObject gameObject { get; set; } = null!;
+    public GameObject gameObject { get; set; } = null!;
     public float TickRate { get; set; } = 20f;
     private float _timer;
     

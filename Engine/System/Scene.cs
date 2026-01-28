@@ -8,21 +8,21 @@ namespace Engine.Core;
 public class Scene
 {
     public string Name { get; }
-    private List<gameObject> _gameObjects = new();
+    private List<GameObject> _gameObjects = new();
     
     public Scene(string name = "Scene")
     {
         Name = name;
     }
     
-    public void AddGameObject(gameObject gameObject)
+    public void AddGameObject(GameObject gameObject)
     {
         _gameObjects.Add(gameObject);
     }
     
-    public gameObject? Find(string name) => _gameObjects.Find(obj => obj.Name == name);
+    public GameObject? Find(string name) => _gameObjects.Find(obj => obj.Name == name);
     
-    public List<gameObject> FindWithTag(string tag) => _gameObjects.FindAll(obj => obj.Tag == tag);
+    public List<GameObject> FindWithTag(string tag) => _gameObjects.FindAll(obj => obj.Tag == tag);
     
     public void Start()
     {
