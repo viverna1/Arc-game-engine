@@ -12,6 +12,7 @@ public class Camera : Component
     private Vector2f _defaultSize;
     private float _currentZoom = 1f;
     public float CurrentZoom => _currentZoom;
+    public Vector2f InitialPosition { get; private set; } = new Vector2f(0, 0);
 
     public override void Start()
     {
@@ -30,7 +31,7 @@ public class Camera : Component
     public void SetPosition(Vector2f position)
     {
         View.Center = position;
-        Application.Instance.Window.SetView(View);
+        // Application.Instance.Window.SetView(View);
     }
 
     public void SetZoom(float zoom)

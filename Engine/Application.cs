@@ -45,7 +45,7 @@ public sealed class Application
     public void LoadScene(Scene scene)
     {
         _currentScene = scene;
-        // scene.Start();
+        scene.Start();
     }
     
     public void Run()

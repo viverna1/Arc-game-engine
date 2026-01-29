@@ -53,7 +53,6 @@ public class GameObject
         T component = new();
         component.gameObject = this;
         _components.Add(component);
-        component.Start();
         return component;
     }
 

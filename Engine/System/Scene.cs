@@ -20,6 +20,11 @@ public class Scene
         _gameObjects.Add(gameObject);
     }
     
+    public void RemoveGameObject(GameObject gameObject)
+    {
+        _gameObjects.Remove(gameObject);
+    }
+
     public GameObject? Find(string name) => _gameObjects.Find(obj => obj.Name == name);
     
     public List<GameObject> FindWithTag(string tag) => _gameObjects.FindAll(obj => obj.Tag == tag);
@@ -32,8 +37,16 @@ public class Scene
     
     public void Update(float deltaTime)
     {
-        foreach (var obj in _gameObjects)
-            obj.Update(deltaTime);
+        // foreach (var obj in _gameObjects)
+        //     obj.Update(deltaTime);
+
+        var objects = _gameObjects.ToList();
+    
+        foreach (var obj in objects)
+        {
+            if (obj.IsActive)
+                obj.Update(deltaTime);
+        }
     }
     
     public void Render(RenderWindow window)
