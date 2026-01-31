@@ -15,6 +15,7 @@ public static class GameScene
         var tileMapObject = new GameObject("TileMap");
         var tileMap = tileMapObject.AddComponent<TileMap>();
         tileMap.scene = scene;
+        scene.AddGameObject(tileMapObject);
 
         // Змейка
         var snake = new GameObject("Snake");
@@ -22,5 +23,6 @@ public static class GameScene
         snake.AddComponent<Transform>();
         snake.AddComponent<SpriteRenderer>().FillColor = SFML.Graphics.Color.Green;
         snakeComp.tileMap = tileMap;
+        scene.AddGameObject(snake);
     }
 }

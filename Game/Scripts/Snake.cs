@@ -15,7 +15,7 @@ class Snake : Component
 
     public override void Start()
     {
-        TickRate = 5f;
+        TickRate = 1f;
         tileMap.AddTile(Position, gameObject);
     }
 

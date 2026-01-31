@@ -31,8 +31,16 @@ public class Scene
     
     public void Start()
     {
-        foreach (var obj in _gameObjects)
-            obj.Start();
+        // foreach (var obj in _gameObjects)
+        //     obj.Start();
+
+        var objects = _gameObjects.ToList();
+    
+        foreach (var obj in objects)
+        {
+            if (obj.IsActive)
+                obj.Start();
+        }
     }
     
     public void Update(float deltaTime)
