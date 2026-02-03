@@ -13,7 +13,6 @@ public sealed class Application
     public static Application Instance => _instance ?? throw new InvalidOperationException("Application not initialized");
     
     public RenderWindow Window { get; }
-    private Scene? _currentScene;
     
     private Application(uint width, uint height, string title)
     {
@@ -42,14 +41,9 @@ public sealed class Application
         _instance = new Application(width, height, title);
     }
     
-    public void LoadScene(Scene scene)
-    {
-        _currentScene = scene;
-        scene.Start();
-    }
-    
     public void Run()
     {
+        Scene.Instance.Start();
         Clock clock = new Clock();
         
         while (Window.IsOpen)
@@ -59,8 +53,8 @@ public sealed class Application
             Window.Clear(new Color(0x0f, 0x12, 0x2a));
             
             float deltaTime = clock.Restart().AsSeconds();
-            _currentScene?.Update(deltaTime);
-            _currentScene?.Render(Window);
+            Scene.Instance.Update(deltaTime);
+            Scene.Instance.Render(Window);
             
             Window.Display();
         }

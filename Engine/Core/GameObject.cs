@@ -83,7 +83,8 @@ public class GameObject
             component.Update(deltaTime);
         }
         
-        foreach (var child in _children)
+        var children = _children.ToList();
+        foreach (var child in children)
         {
             child.Update(deltaTime);
         }

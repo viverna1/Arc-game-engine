@@ -6,10 +6,9 @@ namespace Engine.Components;
 
 class TileMap : Component
 {
-    public Scene? scene;
     public Dictionary<Vector2i, GameObject> Tiles = new();
 
-    public float TileSize = 65;
+    public float TileSize = 64;
 
     public void AddTile(Vector2i position, GameObject tile)
     {
@@ -17,7 +16,7 @@ class TileMap : Component
         gameObject.AddChild(tile);
         tile.transform!.SetPosition(position.X * TileSize, position.Y * TileSize);
         tile.transform!.SetSize(TileSize, TileSize);
-        scene!.AddGameObject(tile);
+        Scene.Instance!.AddGameObject(tile);
     }
 
     public void RemoveTile(Vector2i position)
@@ -25,7 +24,7 @@ class TileMap : Component
         if (Tiles.TryGetValue(position, out GameObject? tile))
         {
             gameObject.RemoveChild(tile);
-            scene!.RemoveGameObject(tile);
+            Scene.Instance.RemoveGameObject(tile);
             Tiles.Remove(position);
         }
     }

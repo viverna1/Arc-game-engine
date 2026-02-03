@@ -11,18 +11,24 @@ public static class GameScene
         camera.AddComponent<Camera>();
         scene.AddGameObject(camera);
 
+        // Тик менеджер
+        var tickManager = new GameObject("TickManager");
+        var tickManagerComp = tickManager.AddComponent<TickManager>();
+        tickManagerComp.SetTickRate(10);
+        scene.AddGameObject(tickManager);
+
         // Сетка тайлов
         var tileMapObject = new GameObject("TileMap");
         var tileMap = tileMapObject.AddComponent<TileMap>();
-        tileMap.scene = scene;
         scene.AddGameObject(tileMapObject);
 
         // Змейка
         var snake = new GameObject("Snake");
         var snakeComp = snake.AddComponent<Snake>();
         snake.AddComponent<Transform>();
-        snake.AddComponent<SpriteRenderer>().FillColor = SFML.Graphics.Color.Green;
         snakeComp.tileMap = tileMap;
         scene.AddGameObject(snake);
+
+        tickManagerComp.AddComponent(snakeComp);
     }
 }

@@ -5,11 +5,9 @@ class GameApp
 {
     static void Main()
     {
-        Application.Initialize(1200, 800, "My Game");
-        Scene scene = new Scene("Main Scene");
-        GameScene.Setup(scene);
+        Application.Initialize(1280, 704, "My Game");
+        GameScene.Setup(Scene.Instance);
         
-        Application.Instance.LoadScene(scene);
         Application.Instance.Run();
     }
-} 
+}

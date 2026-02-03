@@ -7,13 +7,10 @@ namespace Engine.Core;
 
 public class Scene
 {
-    public string Name { get; }
+    private static Scene? _instance;
+    public static Scene Instance => _instance ??= new Scene();
+
     private List<GameObject> _gameObjects = new();
-    
-    public Scene(string name = "Scene")
-    {
-        Name = name;
-    }
     
     public void AddGameObject(GameObject gameObject)
     {
@@ -34,9 +31,7 @@ public class Scene
         // foreach (var obj in _gameObjects)
         //     obj.Start();
 
-        var objects = _gameObjects.ToList();
-    
-        foreach (var obj in objects)
+        foreach (var obj in _gameObjects.ToList())
         {
             if (obj.IsActive)
                 obj.Start();
@@ -48,9 +43,7 @@ public class Scene
         // foreach (var obj in _gameObjects)
         //     obj.Update(deltaTime);
 
-        var objects = _gameObjects.ToList();
-    
-        foreach (var obj in objects)
+        foreach (var obj in _gameObjects.ToList())
         {
             if (obj.IsActive)
                 obj.Update(deltaTime);
