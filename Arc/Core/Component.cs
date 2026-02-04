@@ -1,6 +1,6 @@
-using Engine.Components;
+using Arc.Components;
 
-namespace Engine.Core;
+namespace Arc.Core;
 
 public abstract class Component
 {

@@ -1,5 +1,5 @@
-using Engine.Components;
-using Engine.Core;
+using Arc.Components;
+using Arc.Core;
 using SFML.System;
 
 public static class GameScene
@@ -20,15 +20,32 @@ public static class GameScene
         // Сетка тайлов
         var tileMapObject = new GameObject("TileMap");
         var tileMap = tileMapObject.AddComponent<TileMap>();
+
+        tileMap.Width = 20;
+        tileMap.Height = 11;
+        
+        tileMap.Width = 40;
+        tileMap.Height = 22;
+        tileMap.TileSize = 32;
+        
+        tileMap.Width = 80;
+        tileMap.Height = 44;
+        tileMap.TileSize = 16;
         scene.AddGameObject(tileMapObject);
 
         // Змейка
-        var snake = new GameObject("Snake");
-        var snakeComp = snake.AddComponent<Snake>();
-        snake.AddComponent<Transform>();
-        snakeComp.tileMap = tileMap;
-        scene.AddGameObject(snake);
+        // var snake = new GameObject("Snake");
+        // var snakeComp = snake.AddComponent<Snake>();
+        // snake.AddComponent<Transform>();
+        // snakeComp.tileMap = tileMap;
+        // tickManagerComp.AddComponent(snakeComp);
+        // scene.AddGameObject(snake);
 
-        tickManagerComp.AddComponent(snakeComp);
+        // Игра жизнь
+        var gameOfLife = new GameObject("GameOfLife");
+        var gameOfLifeComp = gameOfLife.AddComponent<GameOfLife>();
+        gameOfLifeComp.tileMap = tileMap;
+        tickManagerComp.AddComponent(gameOfLifeComp);
+        scene.AddGameObject(gameOfLife);
     }
 }

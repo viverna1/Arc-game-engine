@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Engine.Core;
+namespace Arc.Core;
 
 public class TickManager : Component
 {

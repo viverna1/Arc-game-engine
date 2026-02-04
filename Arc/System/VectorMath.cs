@@ -1,7 +1,7 @@
 using SFML.System;
 using System;
 
-namespace Engine.System;
+namespace Arc.System;
 
 public static class VectorMath
 {

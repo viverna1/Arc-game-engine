@@ -1,8 +1,8 @@
 using SFML.System;
-using Engine.Core;
+using Arc.Core;
 using System;
 
-namespace Engine.Components;
+namespace Arc.Components;
 
 public class Transform : Component
 {

@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Engine.Core;
+namespace Arc.Core;
 
 public class GameObject
 {

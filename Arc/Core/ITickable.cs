@@ -1,4 +1,4 @@
-namespace Engine.Core;
+namespace Arc.Core;
 
 public interface ITickable
 {

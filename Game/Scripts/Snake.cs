@@ -1,8 +1,8 @@
-using Engine.Core;
-using Engine.Components;
+using Arc.Core;
+using Arc.Components;
 using SFML.System;
 using System.Collections.Generic;
-using Engine.System;
+using Arc.System;
 using SFML.Window;
 using System;
 
@@ -17,7 +17,7 @@ class Snake : Component, ITickable
     private Vector2i applePos = new(5, 5);
 
     private bool game = true;
-    
+     
  
     public override void Start()
     {

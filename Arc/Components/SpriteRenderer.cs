@@ -1,8 +1,8 @@
 using System;
-using Engine.Core;
+using Arc.Core;
 using SFML.Graphics;
 
-namespace Engine.Components;
+namespace Arc.Components;
 
 public class SpriteRenderer : Component
 {

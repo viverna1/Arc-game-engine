@@ -1,11 +1,11 @@
-﻿using Engine.Core;
-using Engine.System;
+﻿using Arc.Core;
+using Arc.System;
 using SFML.Graphics;
 using SFML.System;
 using SFML.Window;
 using System;
 
-namespace Engine;
+namespace Arc;
 
 public sealed class Application
 {

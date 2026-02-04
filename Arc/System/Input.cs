@@ -3,7 +3,7 @@ using SFML.Graphics;
 using SFML.System;
 using System.Collections.Generic;
 
-namespace Engine.System;
+namespace Arc.System;
 
 public static class Input
 {

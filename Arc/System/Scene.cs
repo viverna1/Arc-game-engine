@@ -1,9 +1,9 @@
-using Engine.Components;
+using Arc.Components;
 using SFML.Graphics;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Engine.Core;
+namespace Arc.Core;
 
 public class Scene
 {

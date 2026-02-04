@@ -1,8 +1,8 @@
-using Engine.Core;
+using Arc.Core;
 using SFML.Graphics;
 using SFML.System;
 
-namespace Engine.Components;
+namespace Arc.Components;
 
 public class Camera : Component
 {

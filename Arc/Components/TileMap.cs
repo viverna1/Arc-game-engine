@@ -1,12 +1,14 @@
-using Engine.Core;
+using Arc.Core;
 using System.Collections.Generic;
 using SFML.System;
 
-namespace Engine.Components;
+namespace Arc.Components;
 
 class TileMap : Component
 {
     public Dictionary<Vector2i, GameObject> Tiles = new();
+    public int Width;
+    public int Height;
 
     public float TileSize = 64;
 
