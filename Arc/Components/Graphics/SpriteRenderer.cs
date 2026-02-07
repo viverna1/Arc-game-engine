@@ -1,13 +1,14 @@
 using System;
 using Arc.Core;
 using SFML.Graphics;
+using SFML.System;
 
 namespace Arc.Components;
 
-public class SpriteRenderer : Component
+public class SpriteRenderer : Renderer
 {
     public Color FillColor = Color.White;
-    public short ZLayer = 0;
+    public override short ZLayer { get; set; } = 0;
     public string SpritePath;
     public Texture Texture;
 
@@ -37,13 +38,13 @@ public class SpriteRenderer : Component
         _shape.FillColor = FillColor;
     }
     
-    public void Draw(RenderWindow window)
+    public override void Draw(RenderWindow window)
     {
         window.Draw(_shape);
     }
 
-    public void SetOrigin(float width, float height)
+    public void SetOrigin(Vector2f pos)
     {
-        _shape.Origin = new SFML.System.Vector2f(width, height);
+        _shape.Origin = pos;
     }
 }

@@ -7,8 +7,8 @@ namespace Arc.Components;
 class TileMap : Component
 {
     public Dictionary<Vector2i, GameObject> Tiles = new();
-    public int Width;
-    public int Height;
+    public int Width { get; set; } = 10;
+    public int Height { get; set; } = 10;
 
     public float TileSize = 64;
 
@@ -16,8 +16,8 @@ class TileMap : Component
     {
         Tiles.Add(position, tile);
         gameObject.AddChild(tile);
-        tile.transform!.SetPosition(position.X * TileSize, position.Y * TileSize);
-        tile.transform!.SetSize(TileSize, TileSize);
+        tile.transform!.Position = new Vector2f(position.X * TileSize, position.Y * TileSize);
+        tile.transform!.SetSize(new Vector2f(TileSize, TileSize));
         Scene.Instance!.AddGameObject(tile);
     }
 

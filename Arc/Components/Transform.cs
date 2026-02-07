@@ -1,6 +1,5 @@
 using SFML.System;
 using Arc.Core;
-using System;
 
 namespace Arc.Components;
 
@@ -11,8 +10,8 @@ public class Transform : Component
     // Локальная позиция (относительно родителя)
     public Vector2f LocalPosition
     {
-        get => new(_localPosition.X, -_localPosition.Y);
-        set => _localPosition = new(value.X, -value.Y);
+        get => new Vector2f(_localPosition.X, -_localPosition.Y) - Size / 2;
+        set => _localPosition = new Vector2f(value.X, -value.Y) - Size / 2;
     }
     
     // Мировая позиция (с учетом родителя)
@@ -73,24 +72,14 @@ public class Transform : Component
     }
     
     public Vector2f Size { get; set; } = new(50, 50);
-
-    public void SetPosition(float x, float y)
-    {
-        Position = new Vector2f(x, y);
-    }
-
-    public void SetPosition(Vector2f pos)
-    {
-        Position = pos;
-    }
     
     public void SetLocalPosition(float x, float y)
     {
         LocalPosition = new Vector2f(x, y);
     }
     
-    public void SetSize(float width, float height)
+    public void SetSize(Vector2f newSize)
     {
-        Size = new Vector2f(width, height);
+        Size = newSize;
     }
 }

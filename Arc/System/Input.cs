@@ -95,7 +95,7 @@ public static class Input
 
     public static Vector2f GetMousePosition()
     {
-        Vector2u screenSize = Application.Instance.Window.Size;
+        Vector2u screenSize = Window.Size;
         Vector2f center = new Vector2f(screenSize.X / 2f, screenSize.Y / 2f);
         return new Vector2f(_mousePosition.X, _mousePosition.Y) - center;
     }
