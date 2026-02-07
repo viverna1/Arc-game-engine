@@ -19,7 +19,7 @@ public static class Input
     private static Vector2i _mouseDelta;
     private static Vector2i _previousMousePosition;
     private static float _mouseWheelDelta;
-    public static RenderWindow? _window;
+    public static RenderWindow _window;
 
     // Вызывается в начале каждого кадра
     internal static void Update()

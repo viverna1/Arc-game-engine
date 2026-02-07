@@ -9,5 +9,5 @@ public abstract class Component
     public virtual void Start() { }
     public virtual void Update(float deltaTime) { }
 
-    public Transform? transform => gameObject?.transform;
+    public Transform transform => gameObject?.transform;
 }

@@ -5,11 +5,14 @@
     <TargetFramework>net10.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>disable</ImplicitUsings>
+    
+    <ApplicationIcon>icon.ico</ApplicationIcon>
+    <StartupObject>GameApp</StartupObject>
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Arc\Arc.csproj" />
     <PackageReference Include="SFML.Net" Version="3.0.0" />
-    <PackageReference Include="YamlDotNet" Version="16.3.0" />
   </ItemGroup>
 
 </Project>

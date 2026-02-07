@@ -12,20 +12,20 @@ public class GameObject
     private List<Component> _components = [];
     
     // Иерархия
-    private GameObject? _parent;
+    private GameObject _parent;
     private List<GameObject> _children = [];
     
-    public GameObject? Parent => _parent;
+    public GameObject Parent => _parent;
     public IReadOnlyList<GameObject> Children => _children;
 
-    public GameObject(string? name = null)
+    public GameObject(string name = null)
     {
         if (name != null)
             Name = name;
     }
 
     // Управление иерархией
-    public void SetParent(GameObject? parent)
+    public void SetParent(GameObject parent)
     {
         // Удаляем из старого родителя
         _parent?._children.Remove(this);
@@ -56,7 +56,7 @@ public class GameObject
         return component;
     }
 
-    public T? GetComponent<T>() where T : Component
+    public T GetComponent<T>() where T : Component
     {
         return _components.OfType<T>().FirstOrDefault();
     }
@@ -92,5 +92,5 @@ public class GameObject
 
     public void SetActive(bool state) => IsActive = state;
     
-    public Components.Transform? transform => GetComponent<Components.Transform>();
+    public Components.Transform transform => GetComponent<Components.Transform>();
 }

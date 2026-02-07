@@ -7,7 +7,7 @@ namespace Arc.Core;
 
 public class Scene
 {
-    private static Scene? _instance;
+    private static Scene _instance;
     public static Scene Instance => _instance ??= new Scene();
 
     private List<GameObject> _gameObjects = new();
@@ -22,7 +22,7 @@ public class Scene
         _gameObjects.Remove(gameObject);
     }
 
-    public GameObject? Find(string name) => _gameObjects.Find(obj => obj.Name == name);
+    public GameObject Find(string name) => _gameObjects.Find(obj => obj.Name == name);
     
     public List<GameObject> FindWithTag(string tag) => _gameObjects.FindAll(obj => obj.Tag == tag);
     

@@ -9,12 +9,12 @@ namespace Arc;
 
 public sealed class Application
 {
-    private static Application? _instance;
+    private static Application _instance;
     public static Application Instance => _instance ?? throw new InvalidOperationException("Application not initialized");
     
     public RenderWindow Window { get; }
     
-    private Application(uint width, uint height, string title)
+    private Application(uint width, uint height, string title, string iconPath)
     {
         Vector2u windowSize = new Vector2u(width, height);
         Window = new RenderWindow(new VideoMode(windowSize), title);
@@ -32,13 +32,21 @@ public sealed class Application
         Window.MouseWheelScrolled += (s, e) => Input.OnMouseWheelScrolled(e.Delta);
         
         Window.SetFramerateLimit(60);
+
+        // Иконка окна
+        try
+        {
+            using var icon = new Image(iconPath);
+            Window.SetIcon(new Vector2u(icon.Size.X, icon.Size.Y), icon.Pixels);
+        }
+        catch { }
     }
     
-    public static void Initialize(uint width, uint height, string title = "Game")
+    public static void Initialize(uint width, uint height, string title = "Game", string iconPath = "icon.png")
     {
         if (_instance != null) 
             throw new InvalidOperationException("Application already initialized");
-        _instance = new Application(width, height, title);
+        _instance = new Application(width, height, title, iconPath);
     }
     
     public void Run()

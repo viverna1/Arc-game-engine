@@ -8,8 +8,8 @@ public class SpriteRenderer : Component
 {
     public Color FillColor = Color.White;
     public short ZLayer = 0;
-    public string? SpritePath;
-    public Texture? Texture;
+    public string SpritePath;
+    public Texture Texture;
 
     private RectangleShape _shape = new();
     

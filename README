@@ -1,0 +1,47 @@
+# Установка
+Клонировать репозиторий
+
+# Документация  
+Движок основан на библиотеке SFML. Все векторы и цвета нужно брать из `using SFML.System`.
+Arc похож на Unity названиями компонентов
+
+## Начало
+### В файле `.csproj`
+Подключить движок и фреймворк SFML.Net:
+```xml
+<ItemGroup>
+  <ProjectReference Include="..\Arc\Arc.csproj" />
+  <PackageReference Include="SFML.Net" Version="3.0.0" />
+</ItemGroup>
+```
+
+И указать иконку приложения (только формат .ico!):
+```xml
+<PropertyGroup>
+  <ApplicationIcon>icon.ico</ApplicationIcon>
+</PropertyGroup>
+```
+
+### Инициализация движка:
+```csharp
+Application.Initialize(1280, 720, "Game", "icon.png");  // Параметры по умолчанию
+```
+- `1280, 720` - разрешение окна
+- `"Game"` - заголовок окна
+- `"icon.png"` - путь к иконке окна (только png!)
+
+**Важно:** Иконка окна (передаваемая в `Initialize()`) и иконка приложения в `.csproj` — это разные вещи. Первая отображается в заголовке окна, вторая — в проводнике Windows.
+
+### Пример полного кода приложения:
+```csharp
+using Arc;
+
+public class GameApp
+{
+    static void Main()
+    {
+        Application.Initialize(1280, 720, "My Game", "Content/icon.png");
+        Application.Instance.Run();
+    }
+}
+```

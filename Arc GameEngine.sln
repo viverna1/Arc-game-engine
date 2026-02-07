@@ -1,0 +1,35 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.2.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Arc", "Arc\Arc.csproj", "{24907963-4936-A4A6-8EFC-2C8882286025}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Template", "Template", "{B81DD640-40B3-2EBF-4088-4A2CAF1F9B56}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Game", "Template\Game.csproj", "{FFCBF865-789F-9ADC-FCDE-519C376A1A55}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{24907963-4936-A4A6-8EFC-2C8882286025}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{24907963-4936-A4A6-8EFC-2C8882286025}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{24907963-4936-A4A6-8EFC-2C8882286025}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{24907963-4936-A4A6-8EFC-2C8882286025}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FFCBF865-789F-9ADC-FCDE-519C376A1A55}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FFCBF865-789F-9ADC-FCDE-519C376A1A55}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FFCBF865-789F-9ADC-FCDE-519C376A1A55}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FFCBF865-789F-9ADC-FCDE-519C376A1A55}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{FFCBF865-789F-9ADC-FCDE-519C376A1A55} = {B81DD640-40B3-2EBF-4088-4A2CAF1F9B56}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {1A946A07-9320-45EF-A533-5F990807E162}
+	EndGlobalSection
+EndGlobal

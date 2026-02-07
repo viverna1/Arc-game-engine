@@ -7,7 +7,7 @@ namespace Arc.Components;
 public class Camera : Component
 {
     public View View { get; private set; } = null!;
-    public static Camera? Main { get; private set; }
+    public static Camera Main { get; private set; }
     
     private Vector2f _defaultSize;
     private float _currentZoom = 1f;
@@ -24,7 +24,7 @@ public class Camera : Component
             Main = this;
         }
         
-        // Apply the view initially
+        SetPosition(new Vector2f(0, 0));
         Application.Instance.Window.SetView(View);
     }
 

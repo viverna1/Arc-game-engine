@@ -23,7 +23,7 @@ class TileMap : Component
 
     public void RemoveTile(Vector2i position)
     {
-        if (Tiles.TryGetValue(position, out GameObject? tile))
+        if (Tiles.TryGetValue(position, out GameObject tile))
         {
             gameObject.RemoveChild(tile);
             Scene.Instance.RemoveGameObject(tile);
