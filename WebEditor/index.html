@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arc Editor</title>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+    <nav id="menu-bar">
+    <ul id="menu-list">
+        <li class="menu-item">
+            <button class="menu-button">Файл</button>
+            <ul class="dropdown">
+                <li><button>Новый</button></li>
+                <li><button>Открыть</button></li>
+                <li><button>Сохранить</button></li>
+            </ul>
+        </li>
+        
+        <li class="menu-item">
+            <button class="menu-button">Вид</button>
+            <ul class="dropdown">
+                <li><button>На весь экран</button></li>
+                <li><button>Масштаб</button></li>
+            </ul>
+        </li>
+        
+        <li class="menu-item">
+            <button class="menu-button">Справка</button>
+            <ul class="dropdown">
+                <li><button>О программе</button></li>
+                <li><button>Документация</button></li>
+            </ul>
+        </li>
+    </ul>
+    </nav>
+
+    <main>
+        <div id="hierarchy">
+            <div class="resizer" id="hierarchy-resizer"></div>
+            <header>Объекты</header>
+            <div class="panel">
+                123
+            </div>
+        </div>
+        
+        <div id="scene">
+            <div class="scene1"></div>
+            <header>Сцена</header>
+            <div class="panel">
+                123
+            </div>
+        </div>
+
+        <div id="inspector">
+            <div class="resizer" id="inspector-resizer"></div>
+            <header>Свойства</header>
+            <div class="panel">
+                123
+            </div>
+        </div>
+
+        <div id="bottom-panel">
+            <div class="resizer" id="bottom-panel-resizer"></div>
+            
+            <section id="explorer">
+                <div class="resizer" id="explorer-resizer"></div>
+                
+                <div id="files-hierarchy">
+                    <div class="resizer" id="files-hierarchy-resizer"></div>
+                    <header>Иерархия</header>
+
+                    <div class="panel scrollable">
+                        <!-- Папка -->
+                        <div class="files-hierarchy-item" data-depth="0">
+                            <button class="folder">Assets</button>
+                        </div>
+                        
+                        <!-- Вложенная папка (внутри Assets) -->
+                        <div class="files-hierarchy-item" data-depth="1">
+                            <button class="folder">Scripts</button>
+                        </div>
+                        
+                        <!-- Файл внутри Scripts -->
+                        <div class="files-hierarchy-item" data-depth="2">
+                            <button class="file">main.js</button>
+                        </div>
+                        
+                        <!-- Еще файл -->
+                        <div class="files-hierarchy-item" data-depth="2">
+                            <button class="file">readme.txt</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="files-section">
+                    <header>Файлы</header>
+                    
+                    <div class="panel scrollable">
+                        <button class="explorer-item folder">
+                            <span class="item-icon"></span>
+                            <span class="item-name">documents</span>
+                        </button>
+
+                        <button class="explorer-item file">
+                            <span class="item-icon"></span>
+                            <span class="item-name">document.txt</span>
+                        </button>
+
+                        <button class="explorer-item file">
+                            <span class="item-icon"></span>
+                            <span class="item-name">document.txt123333333333333333333333333333333</span>
+                        </button>
+
+                        <button class="explorer-item file">
+                            <span class="item-icon"></span>
+                            <span class="item-name">document.txt</span>
+                        </button>
+
+                        <button class="explorer-item file">
+                            <span class="item-icon"></span>
+                            <span class="item-name">document.txt</span>
+                        </button>
+
+                        <button class="explorer-item file">
+                            <span class="item-icon"></span>
+                            <span class="item-name">document.txt</span>
+                        </button>
+
+                        <button class="explorer-item file">
+                            <span class="item-icon"></span>
+                            <span class="item-name">document.txt</span>
+                        </button>
+
+                        <button class="explorer-item file">
+                            <span class="item-icon"></span>
+                            <span class="item-name">document.txt</span>
+                        </button>
+
+                        <button class="explorer-item file">
+                            <span class="item-icon"></span>
+                            <span class="item-name">document.txt</span>
+                        </button>
+
+                        <button class="explorer-item file">
+                            <span class="item-icon"></span>
+                            <span class="item-name">document.txt</span>
+                        </button>
+
+                        <button class="explorer-item file">
+                            <span class="item-icon"></span>
+                            <span class="item-name">document.txt</span>
+                        </button>
+
+                        <button class="explorer-item file">
+                            <span class="item-icon"></span>
+                            <span class="item-name">document.txt</span>
+                        </button>
+
+                        <button class="explorer-item file">
+                            <span class="item-icon"></span>
+                            <span class="item-name">document.txt</span>
+                        </button>
+
+                        <button class="explorer-item file">
+                            <span class="item-icon"></span>
+                            <span class="item-name">document.txt</span>
+                        </button>
+
+                        <button class="explorer-item file">
+                            <span class="item-icon"></span>
+                            <span class="item-name">document.txt</span>
+                        </button>
+
+                        <button class="explorer-item file">
+                            <span class="item-icon"></span>
+                            <span class="item-name">document.txt</span>
+                        </button>
+
+                        <button class="explorer-item file">
+                            <span class="item-icon"></span>
+                            <span class="item-name">document.txt</span>
+                        </button>
+
+                        <button class="explorer-item file">
+                            <span class="item-icon"></span>
+                            <span class="item-name">document.txt</span>
+                        </button>
+
+                        <button class="explorer-item file">
+                            <span class="item-icon"></span>
+                            <span class="item-name">document.txt</span>
+                        </button>
+
+                        <button class="explorer-item file">
+                            <span class="item-icon"></span>
+                            <span class="item-name">document.txt</span>
+                        </button>
+
+                        <button class="explorer-item file">
+                            <span class="item-icon"></span>
+                            <span class="item-name">document.txt</span>
+                        </button>
+
+                        <button class="explorer-item file">
+                            <span class="item-icon"></span>
+                            <span class="item-name">document.txt</span>
+                        </button>
+
+                        <button class="explorer-item file">
+                            <span class="item-icon"></span>
+                            <span class="item-name">document.txt</span>
+                        </button>
+
+                        <button class="explorer-item file">
+                            <span class="item-icon"></span>
+                            <span class="item-name">document.txt</span>
+                        </button>
+
+                        <button class="explorer-item file">
+                            <span class="item-icon"></span>
+                            <span class="item-name">document.txt</span>
+                        </button>
+
+                        <button class="explorer-item file">
+                            <span class="item-icon"></span>
+                            <span class="item-name">document.txt</span>
+                        </button>
+
+                        <button class="explorer-item file">
+                            <span class="item-icon"></span>
+                            <span class="item-name">document.txt</span>
+                        </button>
+
+                        <button class="explorer-item file">
+                            <span class="item-icon"></span>
+                            <span class="item-name">document.txt</span>
+                        </button>
+
+                        <button class="explorer-item file">
+                            <span class="item-icon"></span>
+                            <span class="item-name">document.txt</span>
+                        </button>
+
+                        <button class="explorer-item file">
+                            <span class="item-icon"></span>
+                            <span class="item-name">document.txt</span>
+                        </button>
+
+                        <button class="explorer-item file">
+                            <span class="item-icon"></span>
+                            <span class="item-name">document.txt</span>
+                        </button>
+
+                        <button class="explorer-item file">
+                            <span class="item-icon"></span>
+                            <span class="item-name">document.txt</span>
+                        </button>
+
+                        <button class="explorer-item file">
+                            <span class="item-icon"></span>
+                            <span class="item-name">document.txt</span>
+                        </button>
+
+                        <button class="explorer-item file">
+                            <span class="item-icon"></span>
+                            <span class="item-name">document.txt</span>
+                        </button>
+
+                        <button class="explorer-item file">
+                            <span class="item-icon"></span>
+                            <span class="item-name">document.txt</span>
+                        </button>
+
+                        <button class="explorer-item file">
+                            <span class="item-icon"></span>
+                            <span class="item-name">document.txt</span>
+                        </button>
+
+                        <button class="explorer-item file">
+                            <span class="item-icon"></span>
+                            <span class="item-name">document.txt</span>
+                        </button>
+
+                        <button class="explorer-item file">
+                            <span class="item-icon"></span>
+                            <span class="item-name">document.txt</span>
+                        </button>
+
+                        <button class="explorer-item file">
+                            <span class="item-icon"></span>
+                            <span class="item-name">document.txt</span>
+                        </button>
+
+                        <button class="explorer-item file">
+                            <span class="item-icon"></span>
+                            <span class="item-name">document.txt</span>
+                        </button>
+
+                        <button class="explorer-item file">
+                            <span class="item-icon"></span>
+                            <span class="item-name">document.txt</span>
+                        </button>
+
+                        <button class="explorer-item file">
+                            <span class="item-icon"></span>
+                            <span class="item-name">document.txt</span>
+                        </button>
+
+                        <button class="explorer-item file">
+                            <span class="item-icon"></span>
+                            <span class="item-name">document.txt</span>
+                        </button>
+
+                        <button class="explorer-item file">
+                            <span class="item-icon"></span>
+                            <span class="item-name">document.txt</span>
+                        </button>
+
+                        <button class="explorer-item file">
+                            <span class="item-icon"></span>
+                            <span class="item-name">document.txt</span>
+                        </button>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="console">
+                <header>Консоль</header>
+                
+                <div class="panel">
+
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

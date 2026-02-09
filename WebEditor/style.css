@@ -1,0 +1,290 @@
+:root {
+  --bg-scene: #1a1a1a;
+  --bg-panel: #2d2d2d;
+  --bg-console: #1f1f1f;
+  --accent: #c0392b;
+  --accent-light: #e74c3c;
+  --text: #ecf0f1;
+  --text-secondary: #bdc3c7;
+  --border: rgb(22, 22, 22);
+
+  --hierarchy-width: 250px;
+  --explorer-width: 750px;
+  --bottom-panel-height: 275px;
+  --inspector-width: 400px;
+
+  --files-hierarchy-width: 250px;
+  --file-size: 14%;
+}
+
+/* #region Общие */
+@font-face {
+    font-family: 'SNPro';
+    src: url('SNPro.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    user-select: none;
+}
+body {
+    background-color: black;
+    height: 100vh;
+    color: var(--text);
+    font-family: 'SNPro', 'Roboto', sans-serif;
+    overflow: hidden;
+}
+
+header {
+    padding-left: 5px;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.1);
+    font-weight: bold;
+}
+
+button {
+    background: none;
+    border: none;
+    color: var(--text);
+    font-family: 'SNPro', 'Roboto', sans-serif;
+    font-size: 15px;
+}
+button:hover {
+    background-color: var(--accent);
+}
+button:active {
+    background-color: var(--accent-light);
+}
+
+.scrollable {
+    overflow: auto;
+    max-height: 100%;
+}
+/* #endregion */
+
+
+/* #region Хедер */
+#menu-bar {
+    width: 100%;
+    height: 25px;
+    background-color: #363636;
+    border-bottom: var(--border) 2px solid;
+}
+
+#menu-list {
+    display: flex; 
+    height: 100%;
+}
+.menu-item {
+    cursor: pointer;
+    list-style: none;
+}
+.menu-button {
+    font-family: 'SNPro', 'Roboto', sans-serif;
+    height: 100%;
+    padding: 0 6px;
+}
+.dropdown {
+    position: absolute;
+    z-index: 100;
+    display: none;
+    background-color: var(--bg-panel);
+}
+/* #endregion */
+
+
+/* #region Мэйн и секции */
+main {
+    display: grid;
+    grid-template-columns: var(--hierarchy-width) 1fr var(--inspector-width);
+    grid-template-rows: 1fr var(--bottom-panel-height);
+    height: calc(100vh - 25px);
+}
+
+.panel {
+    padding: 5px    ;
+}
+
+.resizer {
+    position: absolute;
+    background: var(--border);
+    cursor: ew-resize;
+    z-index: 10;
+    top: 0;
+    height: 100%;
+    width: 4px;
+}
+
+#hierarchy {
+    position: relative;
+    grid-column: 1;
+    grid-row: 1;
+    background-color: var(--bg-panel);
+}
+#hierarchy-resizer {
+    right: -2px;
+}
+
+#scene {
+    position: relative;
+    grid-column: 2;
+    grid-row: 1;
+    background-color: var(--bg-scene);
+}
+
+#inspector {
+    position: relative;
+    grid-column: 3;
+    grid-row: 1 / span 2; /* Занимает обе строки */
+    background-color: var(--bg-panel);
+}
+#inspector-resizer {
+    left: -2px;
+}
+
+
+#bottom-panel {
+    position: relative;
+    grid-column: 1 / span 2;
+    display: flex;
+}
+#bottom-panel-resizer {
+    left: 0;
+    top: -2px;
+    height: 4px;
+    width: calc(100vw - var(--inspector-width));
+    cursor: ns-resize;
+}
+
+#explorer {
+    position: relative;
+    display: flex;
+    width: var(--explorer-width);
+    flex: 0, 0, var(--explorer-width);
+    background-color: var(--bg-panel);
+    container-type: inline-size;
+}
+#explorer-resizer {
+    right: 0;
+}
+
+#console {
+    position: relative;
+    flex: 1;
+    background-color: var(--bg-console);
+}
+/* #endregion */
+
+
+/* #region Проводник */
+#explorer .panel {
+    padding: 0;
+    display: flex;
+}
+
+/* Иерархия файлов */
+#files-hierarchy {
+    position: relative;
+    width: var(--files-hierarchy-width);
+}
+#files-hierarchy .panel {
+    display: flex;
+    flex-direction: column;
+}
+@container (max-width: 700px) {
+    #files-hierarchy {
+        display: none;
+    }
+}
+@container (max-width: 300px) {
+    #files-hierarchy {
+        display: block;
+    }
+}
+
+#files-hierarchy-resizer {
+    right: 0;
+    width: 3px;
+}
+
+.files-hierarchy-item {
+    height: 100%;
+}
+.files-hierarchy-item button {
+    padding: 0 8px;
+    height: 100%;
+}
+.files-hierarchy-item[data-depth="1"] { padding-left: 12px; border-left: 2px solid #363636; }
+.files-hierarchy-item[data-depth="2"] { padding-left: 24px; }
+.files-hierarchy-item[data-depth="3"] { padding-left: 36px; }
+
+.files-hierarchy-item .folder::before {
+    content: '📁';
+}
+
+.files-hierarchy-item .file::before {
+    content: '📄';
+}
+
+
+/* Файлы */
+#files-section {
+    width: 100%;
+}
+#files-section .panel {
+    display: flex;
+    flex-wrap: wrap;
+    overflow-y: auto;
+    align-content: flex-start;
+}
+
+@container (max-width: 300px) {
+    #files-section {
+        display: none;
+    }
+}
+
+.explorer-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    max-width: 100px;
+    min-width: 80px;
+    width: var(--file-size);
+    max-height: 100px;
+    aspect-ratio: 1;
+
+    padding: 5px;
+}
+
+.explorer-item .item-icon {
+    width: 60%;
+    aspect-ratio: 1;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    flex-shrink: 0;
+}
+
+.explorer-item .item-name {
+    width: 100%;
+    text-align: center;
+    font-size: 13px;
+    overflow-wrap: break-word;
+    overflow-y: hidden;
+    margin-top: 5px;
+    line-height: 1.2;
+}
+
+
+.explorer-item.folder .item-icon {
+    background-image: url('icons/folder-icon.png');
+}
+.explorer-item.file .item-icon {
+    background-image: url('icons/document-icon.png');
+}
+/* #endregion */
