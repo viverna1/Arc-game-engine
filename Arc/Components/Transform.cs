@@ -10,8 +10,8 @@ public class Transform : Component
     // Локальная позиция (относительно родителя)
     public Vector2f LocalPosition
     {
-        get => new Vector2f(_localPosition.X, -_localPosition.Y) - Size / 2;
-        set => _localPosition = new Vector2f(value.X, -value.Y) - Size / 2;
+        get => new Vector2f(_localPosition.X, -_localPosition.Y);
+        set => _localPosition = new Vector2f(value.X, -value.Y);
     }
     
     // Мировая позиция (с учетом родителя)

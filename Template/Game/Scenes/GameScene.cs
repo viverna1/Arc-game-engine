@@ -1,41 +1,43 @@
 using Arc.Components;
 using Arc.Components.UI;
 using Arc.Core;
-using Arc.System;
 using SFML.System;
+using System;
 
 public static class GameScene
 {
     public static void Setup(Scene scene)
     {
-        // Объект
-        GameObject obj = new("Object");
-        obj.AddComponent<Transform>();
-        obj.AddComponent<SpriteRenderer>();
-        scene.AddGameObject(obj);
-
-
-        var canvas = new GameObject("Canvas");
-        Scene.Instance.AddGameObject(canvas);
-
-        var panelObject = new GameObject("Button");
-        panelObject.SetParent(canvas);
+        GameObject tickManagerObj = new("Object");
+        var tickManager = tickManagerObj.AddComponent<TickManager>();
+        scene.AddGameObject(tickManagerObj);
         
-        var rectPanel = panelObject.AddComponent<RectTransform>();
-        rectPanel.Position = new Vector2f(-100, -25);
-        rectPanel.Size = new Vector2f(200, 50);
-        rectPanel.AnchorMin = new Vector2f(0.5f, 0.5f);
-        rectPanel.AnchorMax = new Vector2f(0.5f, 0.5f);
+        // Создаем Canvas с Transform
+        GameObject canvas = new("Canvas");
         
-        var panelImage = panelObject.AddComponent<Image>();
-        panelImage.FillColor = new SFML.Graphics.Color(100, 100, 100, 200);
+        var tileMapObj = new GameObject("TileMap");
+        var tileMap = tileMapObj.AddComponent<TileMap>();
+        scene.AddGameObject(tileMapObj);
+        
+        var indicatorObj = new GameObject("Indicator");
+        var indicatorRect = indicatorObj.AddComponent<RectTransform>();
+        indicatorRect.Size = new Vector2f(200, 50);
+        var indicatorImage = indicatorObj.AddComponent<Image>();
+        indicatorImage.FillColor = new SFML.Graphics.Color(100, 255, 100);
+        indicatorObj.SetParent(canvas); // Важно: родитель - Canvas!
+        scene.AddGameObject(indicatorObj);
+        
+        var tileMapEditorObj = new GameObject("TileMapEditor");
+        var tileMapEditor = tileMapEditorObj.AddComponent<TileMapEditor>();
+        tileMapEditor.tileMap = tileMap;
+        tileMapEditor.indicatorImage = indicatorImage;
+        tileMapEditor.tickManager = tickManager;
+        scene.AddGameObject(tileMapEditorObj);
+        
+        var cam = new GameObject("CameraControl");
+        cam.AddComponent<CameraControl>();
+        scene.AddGameObject(cam);
 
-        panelObject.AddComponent<Button>();
-        Scene.Instance.AddGameObject(panelObject);
-
-
-        var temp = new  GameObject("temp");
-        obj.AddComponent<Temp>();
-        scene.AddGameObject(temp);
+        scene.AddGameObject(canvas);
     }
 }

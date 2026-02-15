@@ -117,13 +117,48 @@ class UI {
 
 
 class Explorer {
+    constructor() {
+        const nesteds = document.querySelectorAll('.nested');
+        nesteds.forEach(nested => {
+            nested.classList.toggle('collapsed');
+        });
 
+        const buttons = document.querySelectorAll('.file-tree-item.folder');
+        
+        buttons.forEach(button => {
+            button.addEventListener('click', function() {
+                const nextElement = this.nextElementSibling;
+                if (nextElement && nextElement.classList.contains('nested')) {
+                    nextElement.classList.toggle('collapsed');
+                }
+            });
+        });
+    }
 }
 
 
-function main() {
+class Scene {
+    constructor() {
+        this.data = {}
+    }
+
+    async Load() {
+        const response = await fetch('scene.json');
+        this.data = await response.json();
+    }
+}
+
+
+async function main() {
     new Menu();
     new UI();
+    new Explorer();
+    
+    const scene = new Scene();
+    await scene.Load();
+
+    console.log(scene.data);
+    
 }
 
 main();

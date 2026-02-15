@@ -1,0 +1,26 @@
+{
+    "name": "test",
+    "componentTemplates": [
+        {
+            "name": "Transform",
+            "fields": [
+                { "name": "position", "type": "new Vector2f" },
+                { "name": "size", "type": "new Vector2f" },
+                { "name": "rotation", "type": "float" }
+            ]
+        }
+    ],
+    "objects": [
+        {
+            "name": "square",
+            "components": [
+                {
+                    "name": "Transform",
+                    "values": {
+                        "position": "(10, 20)"
+                    }
+                }
+            ]
+        }
+    ]
+}

@@ -1,14 +1,14 @@
 using System;
 using Arc.Core;
 using SFML.Graphics;
-using SFML.System;
 
 namespace Arc.Components;
 
-public class SpriteRenderer : Renderer
+public class SpriteRenderer : IRenderable
 {
-    public Color FillColor = Color.White;
     public override short ZLayer { get; set; } = 0;
+    public override bool IsUI { get; set; } = false;
+    public Color FillColor = Color.White;
     public string SpritePath;
     public Texture Texture;
 
@@ -22,7 +22,6 @@ public class SpriteRenderer : Renderer
                 $"SpriteRenderer requires Transform on GameObject '{gameObject.Name}'");
         }
 
-        var transform = gameObject.transform!; // Получаем Transform
         _shape.Position = transform.Position;
         _shape.Size = transform.Size;
         _shape.FillColor = FillColor;
@@ -30,8 +29,6 @@ public class SpriteRenderer : Renderer
     
     public override void Update(float deltaTime)
     {
-        // Обновляем позицию, если Transform изменился
-        var transform = gameObject.transform!;
         _shape.Position = transform.Position;
         _shape.Rotation = transform.Rotation;
         _shape.Size = transform.Size;
@@ -41,10 +38,5 @@ public class SpriteRenderer : Renderer
     public override void Draw(RenderWindow window)
     {
         window.Draw(_shape);
-    }
-
-    public void SetOrigin(Vector2f pos)
-    {
-        _shape.Origin = pos;
     }
 }

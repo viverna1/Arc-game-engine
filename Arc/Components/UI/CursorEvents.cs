@@ -6,12 +6,20 @@ using System;
 
 namespace Arc.Components.UI;
 
-public abstract class CursorEvents : Component
+public class CursorEvents : Component
 {
     private RectTransform _rect;
     private bool _isHover = false;
     private bool _isMouseDown = false;
     private bool _isPressedOn = false;
+
+    // Объявляем события как делегаты
+    public event Action OnMouseEnter;
+    public event Action OnMouseExit;
+    public event Action OnMouseHover;
+    public event Action OnMousePressed;
+    public event Action OnMouseReleased;
+    public event Action OnClick;
 
     public override void Start()
     {
@@ -33,24 +41,27 @@ public abstract class CursorEvents : Component
         if (isOver && !_isHover)
         {
             _isHover = true;
-            OnMouseEnter();
+            OnMouseEnter?.Invoke();
         }
         else if (!isOver && _isHover)
         {
             _isHover = false;
-            OnMouseExit();
+            OnMouseExit?.Invoke();
         }
         
-        if (isOver) OnMouseHover();
+        if (isOver) OnMouseHover?.Invoke();
 
         // Click логика
         if (mouseDown)
         {
+            if (_isPressedOn)
+            {
+                OnMousePressed?.Invoke();
+            }
             if (isOver && !_isMouseDown)
             {
                 _isPressedOn = true;
                 _isMouseDown = true;
-                OnMousePressed();
             }
             else if (!isOver && !_isMouseDown)
             {
@@ -66,22 +77,15 @@ public abstract class CursorEvents : Component
                 
                 if (_isPressedOn)
                 {
-                    OnMouseReleased();
+                    OnMouseReleased?.Invoke();
                     
                     if (isOver)
                     {
-                        OnMouseClick();
+                        OnClick?.Invoke();
                     }
                 }
                 _isPressedOn = false;
             }
         }
     }
-
-    public virtual void OnMouseEnter() { }
-    public virtual void OnMouseExit() { }
-    public virtual void OnMouseHover() { }
-    public virtual void OnMousePressed() { }
-    public virtual void OnMouseReleased() { }
-    public virtual void OnMouseClick() { }
 }

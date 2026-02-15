@@ -10,40 +10,48 @@ public static class Camera
     private static Vector2f _defaultSize;
     private static float _currentZoom = 1f;
     
-    public static float CurrentZoom => _currentZoom;
-    
     public static void Initialize(RenderWindow window)
     {
-        View = window.GetView();
-        _defaultSize = View.Size;
-        View.Center = new Vector2f(0, 0);  // Устанавливаем камеру в центр
+        _defaultSize = new Vector2f(window.Size.X, window.Size.Y);
+        View = new View(new FloatRect(new Vector2f(0, 0), new Vector2f(window.Size.X, window.Size.Y)));
         window.SetView(View);
     }
     
     public static void UpdateSize(uint width, uint height)
     {
-        View = new View(new FloatRect(new Vector2f(0, 0), new Vector2f(width, height)));
         _defaultSize = new Vector2f(width, height);
+        // View = new View(new FloatRect(new Vector2f(0, 0), new Vector2f(width, height)));
+
         View.Size = _defaultSize / _currentZoom;
+        // View.Center = new Vector2f(width / 2f, height / 2f);
         Window.SetView(View);
     }
-    
-    public static void SetPosition(Vector2f position)
+
+    public static Vector2f Position
     {
-        View.Center = position;
-        Window.SetView(View);
+        get
+        {
+            return View.Center;
+        }
+        set
+        {
+            View.Center = value;
+            Window.SetView(View);
+        }
     }
-    
-    public static void SetZoom(float zoom)
+
+    public static float Zoom
     {
-        _currentZoom = zoom;
-        View.Size = _defaultSize / zoom;
-        Window.SetView(View);
-    }
-    
-    public static void AddZoom(float delta)
-    {
-        SetZoom(_currentZoom + delta);
+        get
+        {
+            return _currentZoom;
+        }
+        set
+        {
+            _currentZoom = value;
+            View.Size = _defaultSize / value;
+            Window.SetView(View);
+        }
     }
     
     public static Vector2f ScreenToWorld(Vector2f screenPos)

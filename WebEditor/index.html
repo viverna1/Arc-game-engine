@@ -58,8 +58,48 @@
         <div id="inspector">
             <div class="resizer" id="inspector-resizer"></div>
             <header>Свойства</header>
+            
             <div class="panel">
-                123
+                <div class="component">
+                    <h2>Transform</h2>
+                    
+                    <div class="properties">
+                        <div class="property">
+                            <label class="property-label">Position</label>
+                            <div class="property-value vector">
+                                <div class="vector-axis">
+                                    <span class="axis-label">X</span>
+                                    <input type="number" value="0" step="1">
+                                </div>
+                                <div class="vector-axis">
+                                    <span class="axis-label">Y</span>
+                                    <input type="number" value="0" step="1">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="property">
+                            <label class="property-label">Size</label>
+                            <div class="property-value vector">
+                                <div class="vector-axis">
+                                    <span class="axis-label">X</span>
+                                    <input type="number" value="0" step="1">
+                                </div>
+                                <div class="vector-axis">
+                                    <span class="axis-label">Y</span>
+                                    <input type="number" value="0" step="1">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="property">
+                            <label class="property-label">Rotation</label>
+                            <div class="property-value">
+                                <input type="number" value="0" step="1">
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -71,268 +111,222 @@
                 
                 <div id="files-hierarchy">
                     <div class="resizer" id="files-hierarchy-resizer"></div>
-                    <header>Иерархия</header>
+                    <header>Arc GameEngine</header>
 
-                    <div class="panel scrollable">
-                        <!-- Папка -->
-                        <div class="files-hierarchy-item" data-depth="0">
-                            <button class="folder">Assets</button>
-                        </div>
-                        
-                        <!-- Вложенная папка (внутри Assets) -->
-                        <div class="files-hierarchy-item" data-depth="1">
-                            <button class="folder">Scripts</button>
-                        </div>
-                        
-                        <!-- Файл внутри Scripts -->
-                        <div class="files-hierarchy-item" data-depth="2">
-                            <button class="file">main.js</button>
-                        </div>
-                        
-                        <!-- Еще файл -->
-                        <div class="files-hierarchy-item" data-depth="2">
-                            <button class="file">readme.txt</button>
-                        </div>
+                    <div class="panel">
+                        <ul class="file-tree">
+                            <!-- Файлы корневого уровня -->
+                            <li>
+                                <button class="file-tree-item file">.gitignore</button>
+                            </li>
+                            
+                            <!-- Папка Arc -->
+                            <li class="folder-container">
+                                <button class="file-tree-item folder">Arc</button>
+                                <ul class="nested">
+                                    <!-- Файлы в Arc -->
+                                    <li><button class="file-tree-item file">Application.cs</button></li>
+                                    <li><button class="file-tree-item file">Arc.csproj</button></li>
+                                    
+                                    <!-- Папка Components -->
+                                    <li class="folder-container">
+                                        <button class="file-tree-item folder">Components</button>
+                                        <ul class="nested">
+                                            <!-- Папка Graphics -->
+                                            <li class="folder-container">
+                                                <button class="file-tree-item folder">Graphics</button>
+                                                <ul class="nested">
+                                                    <li><button class="file-tree-item file">SpriteRenderer.cs</button></li>
+                                                </ul>
+                                            </li>
+                                            
+                                            <!-- Файлы в Components -->
+                                            <li><button class="file-tree-item file">TickManager.cs</button></li>
+                                            <li><button class="file-tree-item file">TileMap.cs</button></li>
+                                            <li><button class="file-tree-item file">Transform.cs</button></li>
+                                            
+                                            <!-- Папка UI -->
+                                            <li class="folder-container">
+                                                <button class="file-tree-item folder">UI</button>
+                                                <ul class="nested">
+                                                    <li><button class="file-tree-item file">Button.cs</button></li>
+                                                    <li><button class="file-tree-item file">CursorEvents.cs</button></li>
+                                                    <li><button class="file-tree-item file">Image.cs</button></li>
+                                                    <li><button class="file-tree-item file">RectTransform.cs</button></li>
+                                                </ul>
+                                            </li>
+                                            
+                                            <!-- Папка Utils -->
+                                            <li class="folder-container">
+                                                <button class="file-tree-item folder">Utils</button>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    
+                                    <!-- Папка Core -->
+                                    <li class="folder-container">
+                                        <button class="file-tree-item folder">Core</button>
+                                        <ul class="nested">
+                                            <li><button class="file-tree-item file">Component.cs</button></li>
+                                            <li><button class="file-tree-item file">GameObject.cs</button></li>
+                                            <li><button class="file-tree-item file">IRenderable.cs</button></li>
+                                            <li><button class="file-tree-item file">ITickable.cs</button></li>
+                                        </ul>
+                                    </li>
+                                    
+                                    <!-- Папка System -->
+                                    <li class="folder-container">
+                                        <button class="file-tree-item folder">System</button>
+                                        <ul class="nested">
+                                            <li><button class="file-tree-item file">Camera.cs</button></li>
+                                            <li><button class="file-tree-item file">Input.cs</button></li>
+                                            <li><button class="file-tree-item file">Scene.cs</button></li>
+                                            <li><button class="file-tree-item file">VectorMath.cs</button></li>
+                                            <li><button class="file-tree-item file">Window.cs</button></li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </li>
+                            
+                            <!-- Файлы корневого уровня -->
+                            <li><button class="file-tree-item file">Arc GameEngine.sln</button></li>
+                            <li><button class="file-tree-item file">README</button></li>
+                            
+                            <!-- Папка Template -->
+                            <li class="folder-container">
+                                <button class="file-tree-item folder">Template</button>
+                                <ul class="nested">
+                                    <!-- Папка Game -->
+                                    <li class="folder-container">
+                                        <button class="file-tree-item folder">Game</button>
+                                        <ul class="nested">
+                                            <!-- Папки в Game -->
+                                            <li class="folder-container">
+                                                <button class="file-tree-item folder">Content</button>
+                                            </li>
+                                            
+                                            <li class="folder-container">
+                                                <button class="file-tree-item folder">Scenes</button>
+                                                <ul class="nested">
+                                                    <li><button class="file-tree-item file">GameScene.cs</button></li>
+                                                </ul>
+                                            </li>
+                                            
+                                            <li class="folder-container">
+                                                <button class="file-tree-item folder">Scripts</button>
+                                                <ul class="nested">
+                                                    <li><button class="file-tree-item file">ScriptTemplate.cs</button></li>
+                                                    <li><button class="file-tree-item file">Temp.cs</button></li>
+                                                </ul>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    
+                                    <!-- Файлы в Template -->
+                                    <li><button class="file-tree-item file">Game.csproj</button></li>
+                                    <li><button class="file-tree-item file">GameApp.cs</button></li>
+                                    <li><button class="file-tree-item file">icon.ico</button></li>
+                                    <li><button class="file-tree-item file">icon.png</button></li>
+                                </ul>
+                            </li>
+                            
+                            <!-- Папка WebEditor -->
+                            <li class="folder-container">
+                                <button class="file-tree-item folder">WebEditor</button>
+                                <ul class="nested">
+                                    <li><button class="file-tree-item file">SNPro.ttf</button></li>
+                                    
+                                    <!-- Папка icons -->
+                                    <li class="folder-container">
+                                        <button class="file-tree-item folder">icons</button>
+                                        <ul class="nested">
+                                            <li><button class="file-tree-item file">document-icon.png</button></li>
+                                            <li><button class="file-tree-item file">folder-icon.png</button></li>
+                                        </ul>
+                                    </li>
+                                    
+                                    <!-- Файлы в WebEditor -->
+                                    <li><button class="file-tree-item file">index.html</button></li>
+                                    <li><button class="file-tree-item file">script.js</button></li>
+                                    <li><button class="file-tree-item file">style.css</button></li>
+                                </ul>
+                            </li>
+                        </ul>
                     </div>
                 </div>
                 
                 <div id="files-section">
-                    <header>Файлы</header>
+                    <header>E:\Git\Dev\Arc GameEngine\</header>
                     
-                    <div class="panel scrollable">
+                    <div class="panel">
                         <button class="explorer-item folder">
                             <span class="item-icon"></span>
-                            <span class="item-name">documents</span>
+                            <span class="item-name">.git</span>
+                        </button>
+
+                        <button class="explorer-item folder">
+                            <span class="item-icon"></span>
+                            <span class="item-name">.vscode</span>
+                        </button>
+
+                        <button class="explorer-item folder">
+                            <span class="item-icon"></span>
+                            <span class="item-name">Arc</span>
+                        </button>
+
+                        <button class="explorer-item folder">
+                            <span class="item-icon"></span>
+                            <span class="item-name">Template</span>
+                        </button>
+
+                        <button class="explorer-item folder">
+                            <span class="item-icon"></span>
+                            <span class="item-name">WebEditor</span>
                         </button>
 
                         <button class="explorer-item file">
                             <span class="item-icon"></span>
-                            <span class="item-name">document.txt</span>
+                            <span class="item-name">.gitignore</span>
                         </button>
 
                         <button class="explorer-item file">
                             <span class="item-icon"></span>
-                            <span class="item-name">document.txt123333333333333333333333333333333</span>
+                            <span class="item-name">Arc GameEngine.sln</span>
                         </button>
 
                         <button class="explorer-item file">
                             <span class="item-icon"></span>
-                            <span class="item-name">document.txt</span>
+                            <span class="item-name">README</span>
                         </button>
 
                         <button class="explorer-item file">
                             <span class="item-icon"></span>
-                            <span class="item-name">document.txt</span>
-                        </button>
-
-                        <button class="explorer-item file">
-                            <span class="item-icon"></span>
-                            <span class="item-name">document.txt</span>
-                        </button>
-
-                        <button class="explorer-item file">
-                            <span class="item-icon"></span>
-                            <span class="item-name">document.txt</span>
-                        </button>
-
-                        <button class="explorer-item file">
-                            <span class="item-icon"></span>
-                            <span class="item-name">document.txt</span>
-                        </button>
-
-                        <button class="explorer-item file">
-                            <span class="item-icon"></span>
-                            <span class="item-name">document.txt</span>
-                        </button>
-
-                        <button class="explorer-item file">
-                            <span class="item-icon"></span>
-                            <span class="item-name">document.txt</span>
-                        </button>
-
-                        <button class="explorer-item file">
-                            <span class="item-icon"></span>
-                            <span class="item-name">document.txt</span>
-                        </button>
-
-                        <button class="explorer-item file">
-                            <span class="item-icon"></span>
-                            <span class="item-name">document.txt</span>
-                        </button>
-
-                        <button class="explorer-item file">
-                            <span class="item-icon"></span>
-                            <span class="item-name">document.txt</span>
-                        </button>
-
-                        <button class="explorer-item file">
-                            <span class="item-icon"></span>
-                            <span class="item-name">document.txt</span>
-                        </button>
-
-                        <button class="explorer-item file">
-                            <span class="item-icon"></span>
-                            <span class="item-name">document.txt</span>
-                        </button>
-
-                        <button class="explorer-item file">
-                            <span class="item-icon"></span>
-                            <span class="item-name">document.txt</span>
-                        </button>
-
-                        <button class="explorer-item file">
-                            <span class="item-icon"></span>
-                            <span class="item-name">document.txt</span>
-                        </button>
-
-                        <button class="explorer-item file">
-                            <span class="item-icon"></span>
-                            <span class="item-name">document.txt</span>
-                        </button>
-
-                        <button class="explorer-item file">
-                            <span class="item-icon"></span>
-                            <span class="item-name">document.txt</span>
-                        </button>
-
-                        <button class="explorer-item file">
-                            <span class="item-icon"></span>
-                            <span class="item-name">document.txt</span>
-                        </button>
-
-                        <button class="explorer-item file">
-                            <span class="item-icon"></span>
-                            <span class="item-name">document.txt</span>
-                        </button>
-
-                        <button class="explorer-item file">
-                            <span class="item-icon"></span>
-                            <span class="item-name">document.txt</span>
-                        </button>
-
-                        <button class="explorer-item file">
-                            <span class="item-icon"></span>
-                            <span class="item-name">document.txt</span>
-                        </button>
-
-                        <button class="explorer-item file">
-                            <span class="item-icon"></span>
-                            <span class="item-name">document.txt</span>
-                        </button>
-
-                        <button class="explorer-item file">
-                            <span class="item-icon"></span>
-                            <span class="item-name">document.txt</span>
-                        </button>
-
-                        <button class="explorer-item file">
-                            <span class="item-icon"></span>
-                            <span class="item-name">document.txt</span>
-                        </button>
-
-                        <button class="explorer-item file">
-                            <span class="item-icon"></span>
-                            <span class="item-name">document.txt</span>
-                        </button>
-
-                        <button class="explorer-item file">
-                            <span class="item-icon"></span>
-                            <span class="item-name">document.txt</span>
-                        </button>
-
-                        <button class="explorer-item file">
-                            <span class="item-icon"></span>
-                            <span class="item-name">document.txt</span>
-                        </button>
-
-                        <button class="explorer-item file">
-                            <span class="item-icon"></span>
-                            <span class="item-name">document.txt</span>
-                        </button>
-
-                        <button class="explorer-item file">
-                            <span class="item-icon"></span>
-                            <span class="item-name">document.txt</span>
-                        </button>
-
-                        <button class="explorer-item file">
-                            <span class="item-icon"></span>
-                            <span class="item-name">document.txt</span>
-                        </button>
-
-                        <button class="explorer-item file">
-                            <span class="item-icon"></span>
-                            <span class="item-name">document.txt</span>
-                        </button>
-
-                        <button class="explorer-item file">
-                            <span class="item-icon"></span>
-                            <span class="item-name">document.txt</span>
-                        </button>
-
-                        <button class="explorer-item file">
-                            <span class="item-icon"></span>
-                            <span class="item-name">document.txt</span>
-                        </button>
-
-                        <button class="explorer-item file">
-                            <span class="item-icon"></span>
-                            <span class="item-name">document.txt</span>
-                        </button>
-
-                        <button class="explorer-item file">
-                            <span class="item-icon"></span>
-                            <span class="item-name">document.txt</span>
-                        </button>
-
-                        <button class="explorer-item file">
-                            <span class="item-icon"></span>
-                            <span class="item-name">document.txt</span>
-                        </button>
-
-                        <button class="explorer-item file">
-                            <span class="item-icon"></span>
-                            <span class="item-name">document.txt</span>
-                        </button>
-
-                        <button class="explorer-item file">
-                            <span class="item-icon"></span>
-                            <span class="item-name">document.txt</span>
-                        </button>
-
-                        <button class="explorer-item file">
-                            <span class="item-icon"></span>
-                            <span class="item-name">document.txt</span>
-                        </button>
-
-                        <button class="explorer-item file">
-                            <span class="item-icon"></span>
-                            <span class="item-name">document.txt</span>
-                        </button>
-
-                        <button class="explorer-item file">
-                            <span class="item-icon"></span>
-                            <span class="item-name">document.txt</span>
-                        </button>
-
-                        <button class="explorer-item file">
-                            <span class="item-icon"></span>
-                            <span class="item-name">document.txt</span>
-                        </button>
-
-                        <button class="explorer-item file">
-                            <span class="item-icon"></span>
-                            <span class="item-name">document.txt</span>
+                            <span class="item-name">Rows Count.py</span>
                         </button>
                     </div>
                 </div>
             </section>
             
             <section id="console">
-                <header>Консоль</header>
+                <header>Console</header>
                 
-                <div class="panel">
+                <div class="panel scrollable">
+                    <pre class="console-output">*  Выполнение задачи: dotnet: build E:\Git\Dev\Arc GameEngine\Template\Game.csproj 
 
+dotnet build E:\Git\Dev\Arc GameEngine\Template\Game.csproj /property:GenerateFullPaths=true /p:Configuration=Debug /p:Platform=AnyCPU /consoleloggerparameters:NoSummary 
+C# extension build result service is available.
+  Определение проектов для восстановления...
+  Все проекты обновлены для восстановления.
+  Arc -> E:\Git\Dev\Arc GameEngine\Arc\bin\Debug\net10.0\Arc.dll
+  Game -> E:\Git\Dev\Arc GameEngine\Template\bin\Debug\net10.0\Game.dll
+
+Сборка успешно завершена.
+    Предупреждений: 0
+    Ошибок: 0
+
+Прошло времени 00:00:05.56
+ *  Терминал будет повторно использоваться задачами. Чтобы закрыть его, нажмите любую клавишу.
+</pre>
                 </div>
             </section>
         </div>

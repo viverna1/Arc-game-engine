@@ -19,7 +19,6 @@ public static class Input
     private static Vector2i _mouseDelta;
     private static Vector2i _previousMousePosition;
     private static float _mouseWheelDelta;
-    public static RenderWindow _window;
 
     // Вызывается в начале каждого кадра
     internal static void Update()
@@ -52,6 +51,17 @@ public static class Input
         _keysReleased.Add(key);
     }
 
+    // Публичные методы для клавиатуры
+    public static bool IsKeyPressed(Keyboard.Key key) => _keysPressed.Contains(key);
+    public static bool IsKeyDown(Keyboard.Key key) => _keysDown.Contains(key);
+    public static bool IsKeyReleased(Keyboard.Key key) => _keysReleased.Contains(key);
+
+    // Мышь - движение
+    internal static void OnMouseMoved(Vector2i position)
+    {
+        _mousePosition = position;
+    }
+    
     // Мышь - кнопки
     internal static void OnMouseButtonPressed(Mouse.Button button)
     {
@@ -68,22 +78,11 @@ public static class Input
         _mouseButtonsReleased.Add(button);
     }
 
-    // Мышь - движение
-    internal static void OnMouseMoved(Vector2i position)
-    {
-        _mousePosition = position;
-    }
-
     // Мышь - колесико
     internal static void OnMouseWheelScrolled(float delta)
     {
         _mouseWheelDelta += delta;
     }
-
-    // Публичные методы для клавиатуры
-    public static bool IsKeyPressed(Keyboard.Key key) => _keysPressed.Contains(key);
-    public static bool IsKeyDown(Keyboard.Key key) => _keysDown.Contains(key);
-    public static bool IsKeyReleased(Keyboard.Key key) => _keysReleased.Contains(key);
 
     // Публичные методы для мыши
     public static bool IsMouseButtonPressed(Mouse.Button button) => _mouseButtonsPressed.Contains(button);
@@ -106,5 +105,5 @@ public static class Input
     }
     
     // Позиция мыши в мировых координатах (с учетом камеры)
-    public static Vector2f GetMouseWorldPosition() => _window!.MapPixelToCoords(_mousePosition);
+    public static Vector2f GetMouseWorldPosition() => Window.Instance.MapPixelToCoords(_mousePosition, Camera.View);
 }

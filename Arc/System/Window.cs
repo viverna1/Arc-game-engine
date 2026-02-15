@@ -37,7 +37,14 @@ public static class Window
     private static void OnWindowResized(object sender, SizeEventArgs e)
     {
         var size = Instance.Size;
-        _uiView = new View(new FloatRect(new Vector2f(0, 0), new Vector2f(size.X, size.Y)));
+
+        // Создание нового Viev
+        // _uiView = new View(new FloatRect(new Vector2f(0, 0), new Vector2f(size.X, size.Y)));
+
+        // Изменение параметров оригинального Viev
+        _uiView.Size = new Vector2f(size.X, size.Y);
+        _uiView.Center = new Vector2f(size.X / 2f, size.Y / 2f);
+
         Camera.UpdateSize(size.X, size.Y);
     }
     
@@ -46,7 +53,5 @@ public static class Window
     public static void DispatchEvents() => Instance.DispatchEvents();
     public static void SetView(View view) => Instance.SetView(view);
     public static View GetView() => Instance.GetView();
-    public static View DefaultView => Instance.DefaultView;
     public static void SetFramerateLimit(uint fps) => Instance.SetFramerateLimit(fps);
-    internal static RenderWindow GetRenderWindow() => Instance;
 }

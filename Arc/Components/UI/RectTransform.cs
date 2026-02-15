@@ -25,17 +25,16 @@ public class RectTransform : Component
     public Vector2f GetPosition()
     {
         Vector2f parentSize = GetParentSize();
-
         Vector2f parentPos = GetParentPosition();
 
         float x, y;
         if (AnchorMin.X == AnchorMax.X)
-            x = parentSize.X * AnchorMin.X + Position.X;
+            x = parentPos.X + parentSize.X * AnchorMin.X + Position.X;
         else
             x = parentPos.X + AnchorMin.X * parentSize.X + Left;
             
         if (AnchorMin.Y == AnchorMax.Y)
-            y = parentSize.Y * AnchorMin.Y + Position.Y;
+            y = parentPos.Y + parentSize.Y * AnchorMin.Y + Position.Y;
         else
             y = parentPos.Y + AnchorMin.Y * parentSize.Y + Top;
         
@@ -58,10 +57,9 @@ public class RectTransform : Component
 
     public Vector2f GetCenter()
     {
-        Vector2f pos = GetPosition();  // Левый верхний угол
-        Vector2f size = GetSize();     // Размер
+        Vector2f pos = GetPosition();
+        Vector2f size = GetSize();
         
-        // Центр = позиция + размер * Pivot
         return new Vector2f(
             pos.X + size.X * Pivot.X,
             pos.Y + size.Y * Pivot.Y
@@ -78,8 +76,7 @@ public class RectTransform : Component
         }
         else
         {
-            var windowSize = Window.Size;
-            return new Vector2f(windowSize.X, windowSize.Y);
+            return Window.UIView.Size;
         }
     }
 

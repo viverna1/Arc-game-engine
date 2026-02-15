@@ -1,6 +1,5 @@
 ﻿using Arc.Core;
 using Arc.System;
-using SFML.Graphics;
 using System;
 
 namespace Arc;
@@ -16,8 +15,7 @@ public sealed class Application
         Window.Initialize(width, height, title, iconPath);
         
         // Инициализируем Input
-        var window = Window.GetRenderWindow();
-        Input._window = window;
+        var window = Window.Instance;
         window.KeyPressed += (s, e) => Input.OnKeyPressed(e.Code);
         window.KeyReleased += (s, e) => Input.OnKeyReleased(e.Code);
         window.MouseButtonPressed += (s, e) => Input.OnMouseButtonPressed(e.Button);
@@ -45,11 +43,10 @@ public sealed class Application
         {
             Input.Update();
             Window.DispatchEvents();
-            Window.Clear(new Color(0x0f, 0x12, 0x2a));
             
             float deltaTime = clock.Restart().AsSeconds();
             Scene.Instance.Update(deltaTime);
-            Scene.Instance.Render(Window.GetRenderWindow());
+            Scene.Instance.Render(Window.Instance);
             
             Window.Display();
         }

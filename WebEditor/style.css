@@ -26,6 +26,7 @@
 }
 
 * {
+    box-sizing: border-box;
     padding: 0;
     margin: 0;
     user-select: none;
@@ -59,9 +60,13 @@ button:active {
     background-color: var(--accent-light);
 }
 
-.scrollable {
+.panel {
     overflow: auto;
-    max-height: 100%;
+    max-height: calc(100% - 25px);
+}
+
+.collapsed {
+    display: none;
 }
 /* #endregion */
 
@@ -102,10 +107,6 @@ main {
     grid-template-columns: var(--hierarchy-width) 1fr var(--inspector-width);
     grid-template-rows: 1fr var(--bottom-panel-height);
     height: calc(100vh - 25px);
-}
-
-.panel {
-    padding: 5px    ;
 }
 
 .resizer {
@@ -189,11 +190,44 @@ main {
 #files-hierarchy {
     position: relative;
     width: var(--files-hierarchy-width);
+    overflow-x: hidden;
 }
-#files-hierarchy .panel {
+
+#files-hierarchy-resizer {
+    right: 0;
+    width: 3px;
+}
+
+.file-tree {
+    list-style: none;
+}
+
+.file-tree ul {
+    list-style: none;
+    margin: 0;
+    padding-left: 10px;
+}
+
+.file-tree-item {
+    padding: 2px 5px 2px 0;
     display: flex;
-    flex-direction: column;
+    align-items: center;
+    font-size: 14px;
 }
+
+.file-tree-item::before {
+    margin-right: 6px;
+    font-size: 16px;
+}
+
+.file-tree ul {
+    border-left: 1.5px solid rgba(255, 255, 255, 0.3);
+    margin-left: 4px;
+}
+
+.file-tree-item.folder::before { content: '📁'; }
+.file-tree-item.file::before { content: '📄'; }
+
 @container (max-width: 700px) {
     #files-hierarchy {
         display: none;
@@ -203,30 +237,6 @@ main {
     #files-hierarchy {
         display: block;
     }
-}
-
-#files-hierarchy-resizer {
-    right: 0;
-    width: 3px;
-}
-
-.files-hierarchy-item {
-    height: 100%;
-}
-.files-hierarchy-item button {
-    padding: 0 8px;
-    height: 100%;
-}
-.files-hierarchy-item[data-depth="1"] { padding-left: 12px; border-left: 2px solid #363636; }
-.files-hierarchy-item[data-depth="2"] { padding-left: 24px; }
-.files-hierarchy-item[data-depth="3"] { padding-left: 36px; }
-
-.files-hierarchy-item .folder::before {
-    content: '📁';
-}
-
-.files-hierarchy-item .file::before {
-    content: '📄';
 }
 
 
@@ -281,10 +291,107 @@ main {
 }
 
 
-.explorer-item.folder .item-icon {
-    background-image: url('icons/folder-icon.png');
-}
-.explorer-item.file .item-icon {
-    background-image: url('icons/document-icon.png');
-}
+.explorer-item.folder .item-icon { background-image: url('icons/folder-icon.png'); }
+.explorer-item.file .item-icon { background-image: url('icons/document-icon.png'); }
 /* #endregion */
+
+/* #region Консоль */
+
+#console .panel {
+    background-color: rgba(0, 0, 0, 0.2);
+    height: 100%;
+}
+
+#console .panel .console-output {
+    user-select: text;
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    white-space: pre-wrap;
+    word-break: break-word;
+    padding: 5px;
+}
+/* #endregion */ 
+
+/* #region Инспектор */
+.component {
+    width: 100%;
+}
+
+.component h2 {
+    border: #1a1a1a 1.5px solid;
+    padding-left: 5px;
+    font-size: 16px;
+    width: 100%;
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.properties {
+    padding: 7px;
+    font-size: 14px;
+}
+
+.property {
+    display: flex;
+    justify-content: space-between;
+    height: 20px;
+    width: 100%;
+    margin-bottom: 5px;
+}
+
+.property-value {
+    justify-content: flex-end;
+    display: flex;
+    flex: 1;
+    gap: 10px;
+    max-width: 300px;
+}
+
+.property-label {
+    flex: 0 0 auto;
+    min-width: 100px;
+}
+
+.property-value input {
+    -moz-appearance: textfield;
+    appearance: textfield;
+    flex: 1 0 auto;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.2);
+    color: var(--text);
+    border: rgba(255, 255, 255, 0.3) 2px solid;
+    border-radius: 6px;
+    padding: 1px 3px;
+}
+
+.vector-axis {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+.axis-label {
+    flex: 0 0 auto;
+    min-width: 20px;
+    text-align: center;
+}
+
+.vector-axis input {
+    flex: 1 1 auto;
+    min-width: 0;
+    box-sizing: border-box;
+}
+
+.property-value.vector {
+    display: flex;
+}
+
+.property-value > input[type="number"] {
+    flex: 0 0 auto;
+    width: 50%;
+}
+/* #endregion */ 
+
+/* #region  */
+/* #endregion */ 
