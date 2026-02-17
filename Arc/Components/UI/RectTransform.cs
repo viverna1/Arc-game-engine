@@ -7,8 +7,8 @@ namespace Arc.Components.UI;
 public class RectTransform : Component
 {
     // Якоря (где прикрепляемся к родителю, 0-1)
-    public Vector2f AnchorMin { get; set; } = new(0f, 0f);
-    public Vector2f AnchorMax { get; set; } = new(0f, 0f);
+    public Vector2f AnchorMin { get; set; } = new(0.5f, 0.5f);
+    public Vector2f AnchorMax { get; set; } = new(0.5f, 0.5f);
     
     // Отступы от якорей
     public float Left { get; set; } = 0f;
@@ -17,7 +17,7 @@ public class RectTransform : Component
     public float Bottom { get; set; } = 0f;
 
     public Vector2f Position { get; set; } = new(0, 0);
-    public Vector2f Size { get; set; } = new(0, 0);
+    public Vector2f Size { get; set; } = new(50, 50);
     
     public float Rotation { get; set; } = 0f;
     public Vector2f Pivot { get; set; } = new(0.5f, 0.5f);

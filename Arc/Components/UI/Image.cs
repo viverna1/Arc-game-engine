@@ -9,6 +9,7 @@ public class Image : IRenderable
 {
     public override short ZLayer { get; set; } = 1000;
     public override bool IsUI { get; set; } = true;
+    
     public Color FillColor = Color.White;
     public Texture Texture;
     
